@@ -1,0 +1,22 @@
+name: Exam CI
+on: 
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: unbuntu-latest
+        steps:
+            - name: checkout reo
+              uses: actions/checkout@v4
+            - name: setup node.js
+              uses: actions/setup-node@v4
+              with:
+                node-verson: 20
+                cache: 'npm'
+            - name: intsall dependencies
+              run: npm ci 
+            - name: check server.js
+              run: node server.js
